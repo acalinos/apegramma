@@ -27,6 +27,11 @@
   --author-link: rgb(150, 31, 86);
 }
 
+/* Impedisce lo zoom al doppio tocco su tutto il sito */
+body, button, .hex, input, a {
+    touch-action: manipulation;
+}
+
 /* --- TEMA SCURO (CLASSE .dark-mode) --- */
 body.dark-mode {
   --bg-body: #121212;

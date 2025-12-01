@@ -22,6 +22,7 @@ let timerInterval;
 let tempoTrascorso = 0;   // Secondi totali accumulati
 let isPaused = false;     // Stato della pausa manuale
 let isPageHidden = false; // Stato della visibilità pagina
+let isMenuOpen = false;   // Stato della sidebar/menu
 
 // Elementi HTML (Solo quelli che servono con il nuovo layout)
 const inputEl = document.getElementById('text-input');
@@ -175,7 +176,7 @@ function startTimer() {
 
     timerInterval = setInterval(() => {
         // Il tempo avanza SOLO se NON è in pausa e la pagina è visibile
-        if (!isPaused && !isPageHidden) {
+        if (!isPaused && !isPageHidden && !isMenuOpen) {
             tempoTrascorso++;
             aggiornaTimerUI();
         }
@@ -215,7 +216,7 @@ function togglePauseManuale() {
 document.addEventListener("visibilitychange", () => {
     if (document.hidden) {
         isPageHidden = true;
-        salvaProgressi(); 
+        salvaProgressi();
     } else {
         isPageHidden = false;
     }
@@ -581,9 +582,18 @@ function setupControlli() {
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebar-overlay');
 
-    function apriSidebar() { sidebar.classList.add('open'); overlay.classList.remove('hidden'); }
-    function chiudiSidebar() { sidebar.classList.remove('open'); overlay.classList.add('hidden'); }
+    function apriSidebar() { 
+        sidebar.classList.add('open'); 
+        sidebarOverlay.classList.remove('hidden'); 
+        isMenuOpen = true; // <--- IL TIMER SI FERMA
+    }
 
+    function chiudiSidebar() { 
+        sidebar.classList.remove('open'); 
+        sidebarOverlay.classList.add('hidden'); 
+        isMenuOpen = false; // <--- IL TIMER RIPARTE
+    }
+    
     if (menuBtn) menuBtn.addEventListener('click', apriSidebar);
     if (closeSidebarBtn) closeSidebarBtn.addEventListener('click', chiudiSidebar);
     if (overlay) overlay.addEventListener('click', chiudiSidebar);
