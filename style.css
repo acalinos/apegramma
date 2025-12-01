@@ -1,0 +1,1116 @@
+/* --- VARIABILI COLORI (TEMA CHIARO DEFAULT) --- */
+:root {
+  --bg-body: #fdfdfd;
+  --text-main: #333;
+  --text-muted: #666;
+  --border-color: #eee;
+
+  /* Pannelli e Input */
+  --panel-bg: #ffffff;
+  --panel-shadow: rgba(0, 0, 0, 0.05);
+
+  /* Esagoni Secondari (Grigi) */
+  --hex-sec-start: #f0f0f0;
+  --hex-sec-end: #d9d9d9;
+  --hex-sec-hover-start: #ffffff;
+  --hex-sec-hover-end: #e6e6e6;
+  --hex-text: #333;
+  --hex-shadow: #babbbd;
+  /* Ombra grigia */
+
+  /* Esagoni Primari (Giallo - resta uguale quasi sempre) */
+  --hex-pri-start: #ffeb3b;
+  --hex-pri-end: #fbc02d;
+  --hex-pri-shadow: #c49000;
+
+  /* Colore link autore */
+  --author-link: rgb(150, 31, 86);
+}
+
+/* --- TEMA SCURO (CLASSE .dark-mode) --- */
+body.dark-mode {
+  --bg-body: #121212;
+  /* Nero morbido */
+  --text-main: #e0e0e0;
+  --text-muted: #a0a0a0;
+  --border-color: #333;
+
+  /* Pannelli e Input */
+  --panel-bg: #1e1e1e;
+  /* Grigio scuro */
+  --panel-shadow: rgba(0, 0, 0, 0.5);
+
+  /* Esagoni Secondari (Scuri) */
+  --hex-sec-start: #4a4a4a;
+  --hex-sec-end: #2d2d2d;
+  --hex-sec-hover-start: #555;
+  --hex-sec-hover-end: #333;
+  --hex-text: #fff;
+  --hex-shadow: #000000;
+  /* Ombra nera */
+
+  /* Colore link autore */
+  --author-link: #ff85c2;
+}
+
+/* --- IMPOSTAZIONI GENERALI --- */
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: var(--bg-body);
+  color: var(--text-main);
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 20px 10px;
+  transition: background-color 0.3s, color 0.3s;
+  /* Transizione morbida cambio tema */
+}
+
+.game-container {
+  max-width: 450px;
+  width: 100%;
+  text-align: center;
+}
+
+header {
+  margin-top: 60px;
+  margin-bottom: 20px;
+}
+
+header h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+
+.emoji {
+  height: 1.1em;
+  width: auto;
+  vertical-align: -0.2em;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.bulb-emoji {
+  height: 1.1em;
+  width: auto;
+  vertical-align: 1em;
+}
+
+/* --- PULSANTE TEMA --- */
+.theme-btn,
+.menu-btn {
+  position: absolute;
+  top: 30px;
+  background-color: var(--panel-bg); /* Sfondo pieno (non trasparente) */
+  border: 1px solid var(--border-color); /* Il bordo sottile */
+  border-radius: 50%; /* PERFETTAMENTE TONDI */
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  transition: transform 0.2s, background-color 0.2s;
+  padding: 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Leggera ombra per staccarli */
+}
+
+/* Posizioni specifiche */
+.theme-btn {
+  right: 30px;
+}
+.menu-btn {
+  left: 30px;
+}
+
+/* Immagini dentro i bottoni superiori */
+.menu-btn img {
+  width: 70%;
+  height: auto;
+  display: block;
+}
+
+.theme-btn img {
+  width: 80%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.theme-btn:hover img {
+  transform: rotate(15deg) scale(1.1);
+}
+
+.hidden-icon {
+  display: none;
+}
+
+/* --- INPUT TEXT --- */
+.input-area {
+  font-size: 2rem;
+  font-weight: bold;
+  height: 50px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  color: var(--text-main);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cursor::after {
+  content: "|";
+  animation: blink 1s step-end infinite;
+  color: #f7da21;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* --- MESSAGGI --- */
+.message {
+  height: 25px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  transition: opacity 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+/* Nota: i messaggi di errore/successo mantengono i loro colori standard per leggibilità */
+.error-msg {
+  color: #d93025;
+  background-color: #fce8e6;
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 4px;
+}
+
+.success-msg {
+  color: #188038;
+  background-color: #e6f4ea;
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 4px;
+}
+
+/* --- ESAGONI --- */
+.hive {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.hex-row {
+  display: flex;
+  justify-content: center;
+  margin-top: -16px;
+}
+
+.hex {
+  width: 85px;
+  height: 85px;
+  border: none;
+  margin: 2px 4px;
+  clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.1s, filter 0.1s, background 0.2s;
+
+  /* Ombra variabile */
+  filter: drop-shadow(0px 4px 0px var(--hex-shadow));
+}
+
+/* Colori Esagoni Variabili */
+.hex.secondary {
+  background: linear-gradient(
+    135deg,
+    var(--hex-sec-start) 0%,
+    var(--hex-sec-end) 100%
+  );
+  color: var(--hex-text);
+}
+
+.hex.primary {
+  background: linear-gradient(
+    135deg,
+    var(--hex-pri-start) 0%,
+    var(--hex-pri-end) 100%
+  );
+  color: #000;
+  /* Il centrale resta sempre nero su giallo */
+  filter: drop-shadow(0px 4px 0px var(--hex-pri-shadow));
+}
+
+.hex:active {
+  transform: translateY(4px);
+  filter: drop-shadow(0px 0px 0px transparent);
+}
+
+@media (hover: hover) {
+  .hex.secondary:hover {
+    background: linear-gradient(
+      135deg,
+      var(--hex-sec-hover-start) 0%,
+      var(--hex-sec-hover-end) 100%
+    );
+  }
+}
+
+/* --- CONTROLLI --- */
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.pill-btn {
+  padding: 12px 28px;
+  border-radius: 30px;
+  border: 1px solid var(--border-color);
+  background: var(--panel-bg);
+  color: var(--text-main);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background 0.2s;
+  width: 30%;
+}
+
+.pill-btn:hover {
+  background-color: var(--border-color);
+}
+
+.pill-btn:active {
+  background-color: #ccc;
+}
+
+.icon-btn {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  background: var(--panel-bg);
+  color: var(--text-main);
+  font-size: 1.4rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.divider {
+  border: 0;
+  height: 1px;
+  background: var(--border-color);
+  margin: 30px 0;
+}
+
+/* --- LISTA PAROLE --- */
+.word-list-container {
+  margin-top: 30px;
+  width: 100%;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  border-top: 1px solid var(--border-color);
+}
+
+.summary-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 5px;
+}
+
+#total-progress {
+  font-weight: bold;
+  color: var(--text-main);
+}
+
+.toggle-btn {
+  background: none;
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s;
+}
+
+.toggle-btn:hover {
+  background-color: var(--border-color);
+}
+
+.hidden-content {
+  display: none;
+  background-color: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 15px;
+  text-align: left;
+  margin-bottom: 50px;
+  box-shadow: 0 4px 10px var(--panel-shadow);
+}
+
+.hidden-content.open {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.word-category,
+.last-word-category {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+
+.word-category {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.last-word-category {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.category-header {
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: var(--text-muted);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category-list {
+  font-size: 0.95rem;
+  color: var(--text-main);
+  line-height: 1.8;
+}
+
+.pangram-header {
+  color: #d8a000;
+}
+
+.word-item {
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+  margin-right: 6px;
+}
+
+.word-item::after {
+  content: ",";
+  color: var(--text-muted);
+  background: transparent;
+}
+
+.word-item:last-child {
+  margin-right: 0;
+}
+
+.word-item:last-child::after {
+  content: ".";
+  color: var(--text-main);
+}
+
+.word-pangram {
+  color: #d8a000;
+  font-weight: 600;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-5px);
+  }
+
+  50% {
+    transform: translateX(5px);
+  }
+
+  75% {
+    transform: translateX(-5px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.shake {
+  animation: shake 0.3s;
+  color: #d93025;
+}
+
+/* --- SIDEBAR MENU --- */
+
+/* Pulsante Menu in alto a sinistra */
+.menu-btn {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: var(--text-main);
+  z-index: 100;
+  padding: 0;
+}
+
+/* Sfondo scuro semi-trasparente */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  backdrop-filter: blur(2px); /* Effetto sfocato moderno */
+  transition: opacity 0.3s;
+}
+.overlay.hidden {
+  opacity: 0;
+  pointer-events: none; /* Permette di cliccare sotto quando è nascosto */
+}
+
+/* Il pannello laterale */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px; /* Larghezza fissa */
+  max-width: 85%; /* Per schermi piccoli */
+  height: 100%;
+  background-color: var(--panel-bg);
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  transform: translateX(-100%); /* Nascondi a sinistra */
+  transition: transform 0.3s ease-out;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Classe per mostrare la sidebar */
+.sidebar.open {
+  transform: translateX(0);
+}
+
+/* Header della sidebar */
+.sidebar-header {
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sidebar-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-muted);
+}
+
+/* Contenuto scorrevole */
+.sidebar-content {
+  padding: 20px;
+  overflow-y: auto;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-main);
+}
+
+.sidebar-content h3 {
+  margin-top: 0;
+  font-size: 1.1rem;
+  color: #d8a000;
+  margin-bottom: 0px;
+}
+
+.sidebar-content ul {
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+.sidebar-content li {
+  margin-bottom: 5px;
+}
+
+.sidebar-content hr {
+  border: 0;
+  border-top: 1px solid var(--border-color);
+  margin: 20px 0;
+}
+
+.sidebar-content a {
+  color: #188038;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.credits-section .small-credit {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 15px;
+  line-height: 1.4;
+}
+
+/* Stile per la lista parole di IERI */
+#yesterday-solution-container {
+  background-color: rgba(0, 0, 0, 0.03);
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+.yesterday-word {
+  display: inline-block;
+  margin-right: 5px;
+}
+.yesterday-pangram {
+  font-weight: bold;
+  color: #d8a000;
+}
+
+/* Link "invisibile" per i crediti */
+.invisible-link {
+  color: var(
+    --author-link
+  ) !important; /* Prende il colore del testo normale (grigio scuro/chiaro) */
+  text-decoration: none; /* Toglie la sottolineatura */
+  font-weight: bold; /* (Opzionale) Lo rende grassetto per farlo notare leggermente */
+  cursor: pointer; /* Mantiene la manina quando ci passi sopra */
+  transition: color 0.2s;
+}
+
+/* Opzionale: piccolo effetto quando ci passi sopra col mouse */
+.invisible-link:hover {
+  text-decoration: underline;
+  opacity: 0.8;
+}
+
+/* --- PUNTEGGIO E TIMER --- */
+.score-board {
+  margin: 20px 0 15px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  color: var(--text-main);
+}
+
+.score-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 60px;
+}
+
+.score-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 2px;
+}
+
+#current-score {
+  color: #d8a000;
+  font-size: 1.8rem;
+  font-weight: bold;
+  line-height: 1;
+}
+
+/* Stile Timer (Monospace per numeri fissi) */
+#timer {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-main);
+  line-height: 1;
+}
+
+.score-divider {
+  font-size: 1.5rem;
+  color: var(--border-color);
+  font-weight: 100;
+}
+
+/* --- NUOVO BOTTONE ORDINAMENTO --- */
+.action-btn {
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: 50%; /* Rotondo */
+  width: 34px;
+  height: 34px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: var(--text-main);
+  transition: background 0.2s;
+  padding: 0;
+}
+.action-btn:hover {
+  background-color: var(--border-color);
+}
+
+/* --- STILE ACCORDION (Menu a tendina) --- */
+
+/* Il bottone del titolo (es. "Come si gioca") */
+.accordion-header {
+  background-color: transparent;
+  color: var(--text-main);
+  cursor: pointer;
+  padding: 5px 5px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 1.1rem;
+  font-weight: bold;
+  font-family: inherit;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s;
+}
+
+.accordion-header:hover {
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.03
+  ); /* Leggero evidenziatore al passaggio */
+  border-radius: 5px;
+}
+
+/* La freccetta ▼ */
+.arrow {
+  display: inline-block;
+  /* font-size: 0.8rem; */
+  color: var(--text-muted);
+  transition: transform 0.3s ease;
+}
+
+/* Quando è aperto, ruota la freccia */
+.accordion-header.active .arrow {
+  transform: rotate(-180deg);
+}
+
+/* Il contenuto nascosto */
+.accordion-content {
+  display: none; /* NASCOSTO DI DEFAULT */
+  padding: 0 10px 10px 10px;
+  overflow: hidden;
+  color: var(--text-main);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Classe per mostrarlo */
+.accordion-content.show {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Divisore leggero */
+.sidebar-divider {
+  border: 0;
+  height: 1px;
+  background: var(--border-color);
+  margin: 5px 0;
+}
+
+/* Fix per i crediti dentro l'accordion */
+.accordion-content ul {
+  padding-left: 20px;
+  margin: 5px 0 15px 0;
+}
+.accordion-content p {
+  margin: 10px 0;
+}
+
+/* --- SUGGERIMENTI --- */
+.hint-wrapper {
+  position: relative;
+}
+
+.hint-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0;
+  font-size: 1.2rem;
+  transition: transform 0.1s;
+}
+
+.hint-btn:active {
+  transform: scale(0.95);
+}
+
+/* Se il bottone è disabilitato (0 aiuti) */
+.hint-btn.disabled {
+  opacity: 0.5;
+  cursor: default;
+  filter: grayscale(100%);
+}
+
+/* Il numero giallo del contatore */
+#hint-count {
+  color: #d8a000;
+  font-weight: bold;
+  font-size: 1.4rem;
+  font-family: "Courier New", Courier, monospace; /* Allineato col timer */
+}
+
+/* Box del messaggio suggerimento */
+.hint-box {
+  margin: 10px auto;
+  padding: 10px;
+  background-color: #fff9c4; /* Giallino chiaro */
+  border: 1px solid #fbc02d;
+  color: #5d4037;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  max-width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.hint-box.hidden {
+  display: none;
+}
+
+/* Testo del suggerimento enfatizzato */
+.hint-reveal {
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* --- BOTTONE CONDIVIDI --- */
+.share-container {
+  display: flex;
+  flex-direction: column; /* Li mette in colonna */
+  gap: 12px;              /* Spazio tra i due */
+  
+  width: 100%;            /* Occupa tutto lo spazio orizzontale... */
+  max-width: 300px;       /* ...ma non superare i 300px */
+  
+  margin: 20px auto;      /* "auto" a dx e sx CENTRA il blocco perfettamente */
+}
+
+/* --- BOTTONI SHARE E SFIDA --- */
+.share-btn {
+  background: transparent;
+  box-shadow: none;
+  border: 2px solid var(--border-color);
+  color: var(--text-muted);
+  padding: 8px 20px;
+  border-radius: 30px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center; /* Aggiunto per centrare il testo */
+  gap: 8px;
+  transition: all 0.3s ease;
+  text-decoration: none; /* Importante per togliere la riga dal link */
+  
+  width: 100%; 
+  margin-bottom: 15px;
+
+  box-sizing: border-box;
+  justify-content: center;
+  font-family: inherit;
+  margin: 0;
+
+  display: flex;
+  align-items: center;
+}
+
+/* --- IL NUOVO STILE PER "MODALITÀ SFIDA" (PRIMARIO) --- */
+#sfida-btn {
+  /* Lo rendiamo GIÀ GIALLO (Solid) per attirare l'attenzione */
+  /* background-color: var(--hex-pri-end);  */
+  border-color: var(--hex-pri-end);
+  
+  /* Colore testo: se il giallo è chiaro, usa un colore scuro/nero */
+  color: var(--text-main); /* o #000000 se text-main è chiaro */
+  
+  /* Opzionale: un'ombra leggera colorata per farlo "galleggiare" */
+  box-shadow: 0 4px 15px rgba(255, 235, 59, 0.4);
+}
+
+/* Hover specifico per la sfida (lo rendiamo ancora più "attivo") */
+#sfida-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 235, 59, 0.6);
+  /* filter: brightness(1.1); */
+}
+
+/* --- IL TUO STILE HOVER PER IL TASTO CONDIVIDI (SECONDARIO) --- */
+/* Questo si applica solo al tasto share che è rimasto trasparente */
+#share-btn:hover {
+  border-color: var(--hex-pri-end);
+  color: var(--text-main);
+  background-color: rgba(255, 235, 59, 0.1);
+  transform: translateY(-2px);
+}
+
+/* --- MODALE SELEZIONE SFIDA --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85); /* Sfondo scuro coprente */
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+}
+
+.modal-content {
+  background: var(--panel-bg);
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  max-width: 90%;
+  width: 350px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  color: var(--text-main);
+  margin: 35px;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  color: #d8a000;
+}
+
+.difficulty-btn {
+  background: transparent;
+  border: 2px solid var(--border-color);
+  color: var(--text-muted);
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 10px;
+  width: 100%;
+  transition: all 0.3s ease;
+  align-items: center;
+  box-shadow: none;
+}
+
+/* Effetto Hover: si "accende" delicatamente */
+.difficulty-btn:hover {
+  /* Il bordo diventa del colore primario (giallo) */
+  border-color: var(--hex-pri-end);
+  /* Il testo diventa più scuro */
+  color: var(--text-main);
+  /* Sfondo leggermente tinteggiato di giallo (molto tenue) */
+  background-color: rgba(255, 235, 59, 0.1);
+  /* Si solleva appena */
+  transform: translateY(-2px);
+}
+
+/* Effetto Click */
+.difficulty-btn:active {
+  transform: translateY(0);
+  background-color: rgba(255, 235, 59, 0.2);
+}
+
+.difficulty-info {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* Timer rosso quando manca poco */
+.timer-danger {
+  color: #d93025 !important;
+  animation: pulsate 1s infinite;
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* --- STILE PAUSA E OVERLAY --- */
+
+/* Rimuove lo stile brutto di default del bottone */
+.pause-btn {
+    background: transparent; /* Sfondo trasparente */
+    border: none;            /* Niente bordo */
+    cursor: pointer;         /* Manina al passaggio del mouse */
+    padding: 0;              /* Niente spazio extra */
+    display: flex;           /* Per centrare l'immagine */
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease; /* Piccola animazione */
+}
+
+/* Dimensione dell'icona pausa */
+.pause-btn img {
+    width: 28px;  /* Grandezza dell'icona (adattala se serve) */
+    height: 28px;
+    opacity: 0.8; /* Leggermente trasparente per eleganza */
+}
+
+/* Effetto quando passi sopra col mouse */
+.pause-btn:hover {
+    transform: scale(1.1); /* Si ingrandisce un po' */
+}
+
+.pause-btn:hover img {
+    opacity: 1; /* Diventa pienamente visibile */
+}
+
+/* Il velo che copre tutto lo schermo */
+#pause-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Sfondo bianco semi-trasparente */
+    background-color: rgba(255, 255, 255, 0.7); 
+    /* LA MAGIA: Sfoca tutto quello che c'è sotto */
+    backdrop-filter: blur(8px); 
+    -webkit-backdrop-filter: blur(8px); /* Per Safari */
+    z-index: 9999; /* Sta sopra a tutto */
+    
+    /* Per centrare il box */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Classe per nascondere l'overlay */
+#pause-overlay.hidden {
+    display: none;
+}
+
+/* Il rettangolo bianco centrale */
+.pause-content {
+    background: white;
+    padding: 30px 50px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    border: 3px solid var(--hex-pri-end); /* Il tuo giallo */
+}
+
+/* --- STILE BOTTONE "RIPRENDI IL GIOCO" --- */
+.resume-btn-styled {
+    /* Sfondo bianco e bordo scuro */
+    background-color: white;
+    border: 2px solid var(--hex-shadow); /* O usa un grigio scuro tipo #888 */
+    color: var(--text-muted);
+    
+    /* Ombra morbida dietro */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    
+    /* Forma a pillola grande */
+    border-radius: 50px;
+    padding: 22px; /* Spazioso */
+    
+    /* Testo e Layout */
+    font-size: 1.3rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* gap: 15px; Spazio tra icona e testo */
+    margin-top: 20px;
+    height: 95px;
+    
+    transition: all 0.2s ease;
+}
+
+/* Stile dell'icona play dentro il bottone */
+.restart-icon {
+    width: 50px; /* Icona bella grande */
+    height: auto;
+    vertical-align: -0.2em;
+}
+
+/* --- Effetti Hover --- */
+.resume-btn-styled:hover {
+    transform: translateY(-3px); /* Si solleva */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2); /* Ombra più marcata */
+    border-color: var(--hex-pri-end); /* Il bordo diventa giallo */
+}
+
+.resume-btn-styled:active {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}

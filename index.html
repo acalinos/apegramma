@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Apegramma</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- <link rel="icon" type="image/png" href="icon.png"> -->
+    <!-- <link rel="apple-touch-icon" href="icon.png"> -->
+</head>
+
+<body>
+
+    <!-- Bottone per cambiare tema -->
+    <button id="theme-toggle" class="theme-btn" aria-label="Cambia tema">
+        <img src="assets/moon.png" id="icon-moon" alt="🌙">
+        <img src="assets/sun.png" id="icon-sun" class="hidden-icon" alt="☀️">
+    </button>
+
+    <!-- Bottone per aprire la sidebar -->
+    <button id="menu-btn" class="menu-btn" aria-label="Menu">
+        <img src="assets/information-button.png" alt="Menu">
+    </button>
+
+    <div class="game-container">
+        <header>
+            <h1> <img src="assets/bee.png" alt="🐝" class="emoji"> Apegramma <img src="assets/bee.png" alt="🐝"
+                    class="emoji"> </h1>
+            <!-- <h2>Trova tutte le parole!</h2> -->
+        </header>
+
+        <div class="input-area">
+            <span id="text-input" class="cursor"></span>
+        </div>
+
+        <div id="message" class="message hidden"></div>
+
+        <div class="hive">
+            <div class="hex-row">
+                <button id="btn-1" class="hex secondary"></button>
+                <button id="btn-2" class="hex secondary"></button>
+            </div>
+            <div class="hex-row">
+                <button id="btn-3" class="hex secondary"></button>
+                <button id="center-btn" class="hex primary"></button> <button id="btn-4" class="hex secondary"></button>
+            </div>
+            <div class="hex-row">
+                <button id="btn-5" class="hex secondary"></button>
+                <button id="btn-6" class="hex secondary"></button>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="delete-btn" class="pill-btn">Cancella</button>
+            <button id="shuffle-btn" class="pill-btn" title="Mischia lettere">Mescola</button>
+            <button id="enter-btn" class="pill-btn">Invio</button>
+        </div>
+
+        <div class="score-board">
+            <div class="score-item">
+                <span class="score-label">Punti</span>
+                <span id="current-score">0</span>
+            </div>
+
+            <div class="score-divider">|</div>
+
+            <div class="score-item">
+                <span class="score-label">Tempo</span>
+                <span id="timer">00:00</span>
+            </div>
+
+            <div class="score-divider">|</div>
+
+            <div class="score-item hint-wrapper">
+                <span class="score-label">Aiuti</span>
+                <button id="hint-btn" class="hint-btn" title="Suggerimento">
+                    <span id="hint-count">0</span>
+                    <img src="assets/bulb.png" alt="💡" class="bulb-emoji">
+                </button>
+            </div>
+
+            <div class="score-divider">|</div>
+
+            <div class="score-item">
+                <span class="score-label">Pausa</span>
+                <button id="pause-btn" class="pause-btn" onclick="togglePauseManuale()" title="Pausa">
+                    <img src="assets/pause.png" alt="⏸️" class="emoji">
+                </button>
+            </div>
+        </div>
+
+        <div id="hint-msg-box" class="hint-box hidden">
+            <span id="hint-text"></span>
+        </div>
+
+        <div class="share-container">
+            <a href="sfida.html" id="sfida-btn" class="share-btn button-link">
+                Modalità Sfida <img src="assets/hourglass.png" alt="⏳" class="bulb-emoji">
+            </a>
+            <button id="share-btn" class="share-btn">
+                Condividi il tuo risultato!
+            </button>
+        </div>
+
+        <div class="word-list-container">
+
+            <div class="summary-bar">
+                <span id="total-progress">Trovate: 0</span>
+
+                <div style="display: flex; gap: 10px;">
+                    <button id="sort-btn" class="action-btn" title="Cambia ordine">🔤</button>
+
+                    <button id="toggle-list-btn" class="toggle-btn">
+                        Parole da trovare ▼
+                    </button>
+                </div>
+            </div>
+
+            <div id="words-content" class="hidden-content">
+
+                <div id="section-pangrams" class="word-category">
+                </div>
+
+                <div id="section-letters">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="sidebar-overlay" class="overlay hidden"></div>
+
+    <aside id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h2>Menu</h2>
+            <button id="close-sidebar-btn" class="close-btn">✕</button>
+        </div>
+
+        <div class="sidebar-content">
+
+            <button class="accordion-header">
+                <h3><img src="assets/bee.png" alt="🐝" class="emoji"> Come si gioca <span class="arrow">▼</span> </h3>
+            </button>
+            <div class="accordion-content">
+                <p>Componi parole di almeno <strong>4 lettere</strong> usando solo le lettere nell'alveare.</p>
+                <ul>
+                    <li>Devi usare sempre la lettera <strong>centrale</strong>.</li>
+                    <li>Le lettere possono essere ripetute.</li>
+                    <li>Non valgono nomi propri e verbi coniugati (solo infiniti e participi).</li>
+                </ul>
+                <p>Ogni 7 parole trovate ottieni un <strong>suggerimento</strong>: clicca sulla lampadina per usarlo.
+                </p>
+                <p><strong>Punteggio:</strong></p>
+                <ul>
+                    <li>4 lettere = 1 punto.</li>
+                    <li>5+ lettere = 1 punto per lettera.</li>
+                    <li><strong>Apegramma</strong> (usa tutte le 7 lettere) = +7 punti bonus!</li>
+                </ul>
+            </div>
+
+            <hr>
+
+            <button class="accordion-header">
+                <h3><img src="assets/calendar.png" alt="⏮" class="emoji"> Soluzioni di Ieri <span class="arrow">▼</span>
+                </h3>
+            </button>
+            <div class="accordion-content">
+                <div id="yesterday-solution-container">
+                    <p style="color:#888;">Apri per caricare...</p>
+                </div>
+            </div>
+
+            <hr>
+
+            <button class="accordion-header">
+                <h3><img src="assets/hourglass.png" alt="" class="emoji"> Modalità Sfida <span class="arrow">▼</span>
+                </h3>
+            </button>
+            <div class="accordion-content">
+                <p>La modalità Sfida può essere giocata <strong>una volta</strong> al giorno.</p>
+                <ul>
+                    <li>Sfida rapida: 2 minuti.</li>
+                    <li>Sfida classica: 7 minuti.</li>
+                    <li>Sfida sfinimento: 15 minuti.</li>
+                </ul>
+                <p>Accumula più punti possibili nel tempo stabilito e <strong>sfida i tuoi amici</strong> condividendo i
+                    tuoi risultati.</p>
+                <p>Attenzione: nella modalità Sfida non ci sono suggerimenti.</p>
+            </div>
+
+            <hr>
+
+            <button class="accordion-header">
+                <h3><img src="assets/stem-girl.png" alt="ℹ️" class="emoji"> Crediti <span class="arrow">▼</span> </h3>
+            </button>
+            <div class="accordion-content credits-section">
+                <p>Sviluppato da <a href="t.me/acalinos" target="_blank" class="invisible-link">@acalinos</a></p>
+                <p>Il tuo feedback è fondamentale per migliorare il gioco:
+                    scrivimi per errori o altre segnalazioni!</p>
+                <!-- <p class="small-credit"> -->
+                <!-- Lessico basato su <strong>Morph-it!</strong><br> -->
+                <!-- University of Bologna (M. Baroni, E. Zanchetta).<br> -->
+                <!-- Distribuito sotto licenza Creative Commons. -->
+                <!-- </p> -->
+            </div>
+
+        </div>
+    </aside>
+
+    <div id="pause-overlay" class="hidden">
+        <button class="resume-btn-styled" onclick="togglePauseManuale()">
+            <span class="icon"><img src="assets/play.png" class="restart-icon"></span>
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

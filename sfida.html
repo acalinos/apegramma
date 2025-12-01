@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Apegramma Sfida</title>
+    <link rel="stylesheet" href="style.css">
+    
+    </head>
+<body>
+
+    <button id="theme-toggle" class="theme-btn" aria-label="Cambia tema">
+        <img src="assets/moon.png" id="icon-moon" alt="🌙">
+        <img src="assets/sun.png" id="icon-sun" class="hidden-icon" alt="☀️">
+    </button>
+
+    <a href="index.html" class="menu-btn" aria-label="Home">
+        <img src="assets/home.png" alt="Home" class="emoji">
+    </a>
+
+    <div class="game-container">
+        <header>
+            <h1> <img src="assets/bee.png" alt="🐝" class="emoji"> Sfida <img src="assets/bee.png" alt="🐝" class="emoji"> </h1>
+        </header>
+        
+        <div class="input-area">
+            <span id="text-input" class="cursor"></span>
+        </div>
+
+        <div id="message" class="message hidden"></div>
+
+        <div class="hive">
+            <div class="hex-row">
+                <button id="btn-1" class="hex secondary"></button>
+                <button id="btn-2" class="hex secondary"></button>
+            </div>
+            <div class="hex-row">
+                <button id="btn-3" class="hex secondary"></button>
+                <button id="center-btn" class="hex primary"></button> <button id="btn-4" class="hex secondary"></button>
+            </div>
+            <div class="hex-row">
+                <button id="btn-5" class="hex secondary"></button>
+                <button id="btn-6" class="hex secondary"></button>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="delete-btn" class="pill-btn">Cancella</button>
+            <button id="shuffle-btn" class="pill-btn" title="Mischia lettere">Mescola</button>
+            <button id="enter-btn" class="pill-btn">Invio</button>
+        </div>
+
+        <div class="score-board">
+            <div class="score-item">
+                <span class="score-label">Punti</span>
+                <span id="current-score">0</span>
+            </div>
+            
+            <div class="score-divider">|</div>
+            
+            <div class="score-item">
+                <span class="score-label">Tempo</span>
+                <span id="timer">--:--</span>
+            </div>
+            
+            </div>
+
+        <div class="share-container">
+            <button id="share-btn" class="share-btn" style="display: none;">
+                Condividi il tuo risultato! 
+            </button>
+        </div>
+
+        <div class="word-list-container">
+            
+            <div class="summary-bar">
+                <span id="total-progress">Trovate: 0</span>
+                
+                <div style="display: flex; gap: 10px;">
+                    <button id="toggle-list-btn" class="toggle-btn">
+                        Parole trovate ▼
+                    </button>
+                </div>
+            </div>
+
+            <div id="words-content" class="hidden-content">
+                <div id="section-pangrams" class="word-category" style="display:none;"></div>
+                <div id="section-letters"></div>
+            </div>
+            
+        </div>
+
+    </div>
+
+    <div id="setup-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2>Modalità Sfida <img src="assets/lightning.png" alt="⚡️" class="emoji"> </h2>
+            <p>Scegli la durata della sfida.</p>
+            <p>Puoi giocare solo <strong>una volta</strong> al giorno!</p>
+            
+            <button class="difficulty-btn" onclick="impostaSfida(2)">
+                Rapida (2 min)
+            </button>
+            
+            <button class="difficulty-btn" onclick="impostaSfida(7)">
+                Classica (7 min)
+            </button>
+            
+            <button class="difficulty-btn" onclick="impostaSfida(15)">
+                Sfinimento (15 min)
+            </button>
+            
+            <p class="difficulty-info">Il timer partirà appena clicchi!</p>
+        </div>
+    </div>
+
+    <div id="pause-overlay" class="hidden">
+        <div class="pause-content">
+            <h2>Gioco in Pausa ☕</h2>
+            <p>Il tempo è fermo.</p>
+            <button class="resume-btn" onclick="togglePauseManuale()">
+                Riprendi il gioco <img src="assets/play.png" alt="▶️" class="emoji">
+            </button>
+        </div>
+    </div>
+
+    <script src="script_sfida.js"></script>
+</body>
+</html>
