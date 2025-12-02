@@ -335,7 +335,7 @@ function setupControlli() {
         shareBtn.addEventListener('click', async () => {
             const testo = `Sfida Apegramma (${durataScelta}min) ⚡️\n` +
                           `🐝 Parole trovate: ${paroleTrovate.length}\n` +
-                          `🎯 Punti: ${document.getElementById('current-score').textContent}\n` 
+                          `🎯 Punti: ${punteggio}\n` +
                           `Prova a battermi se ci riesci!\n\n` +
                           `https://apegramma.netlify.app/`;
             
