@@ -61,6 +61,8 @@ nanna
 nanne
 omero
 omerta
+ramarri
+ramarro
 tarantina
 tarantine
 tarantini
@@ -69,4 +71,8 @@ umorale
 umorali
 umore
 umori
+zozza
+zozze
+zozzi
+zozzo
 zeta
